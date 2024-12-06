@@ -1,4 +1,4 @@
-﻿namespace AngularInsurancePortal.API.Models
+﻿namespace AngularInsurancePortal.API.Models.Domain
 {
     public class Insurance
     {

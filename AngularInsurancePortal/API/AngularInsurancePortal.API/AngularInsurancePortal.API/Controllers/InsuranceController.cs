@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AngularInsurancePortal.API.Data;
+using AngularInsurancePortal.API.Models.Domain;
+using AngularInsurancePortal.API.Models.DTO;
+using AngularInsurancePortal.API.Repositories.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AngularInsurancePortal.API.Controllers
@@ -7,5 +11,34 @@ namespace AngularInsurancePortal.API.Controllers
     [ApiController]
     public class InsuranceController : ControllerBase
     {
+        private readonly IInsuranceRepository insuranceRepository;
+
+        public InsuranceController(IInsuranceRepository insuranceRepository)
+        {
+            this.insuranceRepository = insuranceRepository;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateInsurance(CreateInsuranceRequestDTO request)
+        {
+            // Map DTO to domain models
+            var insurance = new Insurance
+            {
+                Name = request.Name,
+                Description = request.Description
+            };
+
+            await insuranceRepository.CreateAsync(insurance);
+
+            // Domain model to DTO
+            var response = new InsuranceDto
+            {
+                Id = insurance.Id,
+                Name = request.Name,
+                Description = request.Description
+            };
+
+            return Ok(response);
+        }
     }
 }

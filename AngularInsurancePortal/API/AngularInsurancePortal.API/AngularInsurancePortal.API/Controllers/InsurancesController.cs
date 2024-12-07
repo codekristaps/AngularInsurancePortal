@@ -40,5 +40,26 @@ namespace AngularInsurancePortal.API.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllInsurances()
+        {
+            var insurances = await insuranceRepository.GetAllAsync();
+
+            // map domain model to DTO
+            var response = new List<InsuranceDto>();
+
+            foreach (var insurance in insurances)
+            {
+                response.Add(new InsuranceDto
+                {
+                    Id = insurance.Id,
+                    Name = insurance.Name,
+                    Description = insurance.Description
+                });
+            }
+
+            return Ok(response);
+        }
     }
 }

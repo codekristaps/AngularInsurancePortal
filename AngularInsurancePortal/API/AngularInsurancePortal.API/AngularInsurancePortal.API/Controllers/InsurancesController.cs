@@ -9,11 +9,11 @@ namespace AngularInsurancePortal.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InsuranceController : ControllerBase
+    public class InsurancesController : ControllerBase
     {
         private readonly IInsuranceRepository insuranceRepository;
 
-        public InsuranceController(IInsuranceRepository insuranceRepository)
+        public InsurancesController(IInsuranceRepository insuranceRepository)
         {
             this.insuranceRepository = insuranceRepository;
         }

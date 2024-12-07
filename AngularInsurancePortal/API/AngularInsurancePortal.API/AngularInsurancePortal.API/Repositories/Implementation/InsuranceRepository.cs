@@ -21,5 +21,10 @@ namespace AngularInsurancePortal.API.Repositories.Implementation
 
             return insurance;
         }
+
+        public async Task<IEnumerable<Insurance>> GetAllAsync()
+        {
+            return await dbContext.Insurances.ToListAsync();
+        }
     }
 }

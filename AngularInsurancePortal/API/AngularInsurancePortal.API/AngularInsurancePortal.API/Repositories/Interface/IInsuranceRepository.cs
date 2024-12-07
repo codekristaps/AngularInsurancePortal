@@ -5,5 +5,6 @@ namespace AngularInsurancePortal.API.Repositories.Interface
     public interface IInsuranceRepository
     {
         Task<Insurance> CreateAsync(Insurance insurance);
+        Task<IEnumerable<Insurance>> GetAllAsync();
     }
 }

@@ -1,6 +1,25 @@
 <div class="container">
     <h1 class="mt-3">Insurance List</h1>
     <div class="d-flex justify-content-end mt-3">
-        <a [routerLink]="['admin/insurances/add']" class="btn btn-primary">Add Insurance</a>
+        <a [routerLink]="['/admin/insurances/add']" class="btn btn-primary">Add Insurance</a>
     </div>
+
+    <ng-container *ngIf="insurances$ | async as insurances">
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let insurance of insurances">
+                    <td>{{insurance.id}}</td>
+                    <td>{{insurance.name}}</td>
+                    <td>{{insurance.description}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
 </div>

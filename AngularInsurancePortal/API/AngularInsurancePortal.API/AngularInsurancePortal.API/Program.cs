@@ -1,5 +1,6 @@
 using AngularInsurancePortal.API.Data;
 using AngularInsurancePortal.API.Repositories.Implementation;
+using AngularInsurancePortal.API.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 // inject the Insurance repository
-builder.Services.AddScoped<InsuranceRepository, InsuranceRepository>();
+builder.Services.AddScoped<IInsuranceRepository, InsuranceRepository>();
 
 var app = builder.Build();
 
@@ -30,6 +31,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(options =>
+{
+    options.AllowAnyHeader();
+    options.AllowAnyOrigin();
+    options.AllowAnyMethod();
+});
 
 app.UseAuthorization();
 
